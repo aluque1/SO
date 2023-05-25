@@ -1,0 +1,13 @@
+Pregunta 1: 
+clone_string() aloja la memoria necesario para guardar el string que vamos a copiar en una variable nueva, 
+con una dirección en memoria diferente, y es en esa nueva direccion donde realiza copia.
+De este modo modremos modificar y acceder a ese string sin afectar al original
+
+Se usa clone_string() porque está devolviendo un puntero al string original,
+lo cual sería un problema en caso de que queramos tratarlo o modificarlo en un futuro.
+
+
+Pregunta 2:
+La variable line ha sido modificada, cambiando su primer carácter ":" por el caracter de final de string "\0"
+La variable lineptr (puntero a line) ha avanzado su posición hasta el primer carácter después de los ":"
+y la variable token ahora apunta al principio de lineptr, almacenando unicamente el primer string que había antes de los ":"

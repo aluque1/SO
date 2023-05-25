@@ -1,0 +1,7 @@
+"-f", "database", "-c", "27:67659034X:Chris:Rock", "34:78675903J:Antonio:Banderas"
+"-f", "database", "-l"
+"-f", "database", "-a", "3:58943056J:Antonio:Segura"
+"-f", "database", "-a", "4:6345239G:Penelope:Cruz"
+"-f", "database", "-q", "-i", "34"
+tar -czvf filename.tar.gz /path/to/dir1 dir2 file1 file2
+tar -czvf G8_P1.tar.gz 

@@ -1,0 +1,10 @@
+
+n=25
+./cocinero & 
+echo "cocinero $!"
+& sleep 5 
+for((i=0, $i<$n, i++))
+do
+./salvaje $i & echo "salvaje $i pid=$!"
+done
+wait
