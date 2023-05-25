@@ -4,11 +4,11 @@
 #include <dirent.h>
 #include <string.h>
 
-/* Forward declaration */
 int get_size_dir(char *fname, size_t *blocks);
 int get_size(char *fname, size_t *blocks);
 
-/* Processes all the files in the command line calling get_size on them to
+/**
+ * Processes all the files in the command line calling get_size on them to
  * obtain the number of 512 B blocks they occupy and prints the total size in
  * kilobytes on the standard output
  */
@@ -25,8 +25,13 @@ int main(int argc, char *argv[]){
 	return 0;
 }
 
-/* Gets in the blocks buffer the size of file fname using lstat. If fname is a
+/**
+ * Gets in the blocks buffer the size of file fname using lstat. If fname is a
  * directory get_size_dir is called to add the size of its contents.
+ *
+ * @param fname name of the file to get the size of
+ * @param blocks pointer to the buffer where the size will be stored
+ * @return EXIT_SUCCESS if no errors occurred, EXIT_FAILURE otherwise
  */
 int get_size(char *fname, size_t *blocks){
 	struct stat *stat_buff = malloc(sizeof(struct stat));
@@ -41,9 +46,14 @@ int get_size(char *fname, size_t *blocks){
 	return EXIT_SUCCESS;
 }
 
-/* Gets the total number of blocks occupied by all the files in a directory. If
+/**
+ * Gets the total number of blocks occupied by all the files in a directory. If
  * a contained file is a directory a recursive call to get_size_dir is
  * performed. Entries . and .. are conveniently ignored.
+ * 
+ * @param dname name of the directory to get the size of
+ * @param blocks pointer to the buffer where the size will be stored
+ * @return EXIT_SUCCESS if no errors occurred, EXIT_FAILURE otherwise
  */
 int get_size_dir(char *dname, size_t *blocks){
 	DIR *dir;

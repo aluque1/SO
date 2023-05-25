@@ -4,9 +4,13 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-/*programa que crea dos hijos: uno no cambia de ejecutable y otro si */
-
-// el programa recibe como paremetros el nombre del ejecutable que deberia ejecutrar y los argumentos que necesite para exe
+/**
+ * 	Programa que crea dos hijos: uno no cambia de ejecutable y otro si
+ * 	el programa recibe como paremetros el nombre del ejecutable que deberia ejecutrar y los argumentos que necesite para exe 
+ *	@param argc número de argumentos
+ *	@param argv vector de argumentos
+ *	@return EXIT_SUCCESS si no ha habido errores, EXIT_FAILURE en caso contrario
+*/
 int main(int argc, char *argv[])
 {
 	int status;

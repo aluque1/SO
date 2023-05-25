@@ -4,8 +4,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-/* programa que crea N hijos siguiendo un grado de dependencias. Usa las
- * versiones de execl y execlp */
+/* programa que crea N hijos siguiendo un grafo de dependencias. Usa las
+ * versiones de execl y execlp 
+	
+	TODO :: MIRAR EL GRAFO EN EL PDF
+ */
 
 int main(int argc, char **argv)
 {

@@ -7,10 +7,17 @@
 
 #define NBYTES 512
 
+
 void copy(int fdo, int fdd);
 void copy_regular(char *orig, char *dest);
 void copy_link(char *orig, char *dest);
 
+/**
+ * Función principal
+ * @param argc número de argumentos
+ * @param argv vector de argumentos
+ * @return EXIT_SUCCESS si no ha habido errores, EXIT_FAILURE en caso contrario
+*/
 int main(int argc, char *argv[])
 {
 
@@ -26,7 +33,7 @@ int main(int argc, char *argv[])
 			copy_regular(argv[1], argv[2]);
 			return EXIT_SUCCESS;
 		}
-		else if (S_ISLNK(stat_buff->st_mode) == 1)
+		else if (S_ISLNK(stat_buff->st_mode) == 1) // S_ISLNK(m) es una funcion que devuelve true si el modo de stat es equivalente a de un enlace simbolico
 		{ // si es un enlace simbolico
 			copy_link(argv[1], argv[2]);
 			return EXIT_SUCCESS;
@@ -41,6 +48,12 @@ int main(int argc, char *argv[])
 		return EXIT_FAILURE;
 }
 
+/**
+ * Función que copia el contenido de un archivo en otro
+ * @param fdo descriptor de archivo origen
+ * @param fdd descriptor de archivo destino
+ * @return EXIT_SUCCESS si no ha habido errores, EXIT_FAILURE en caso contrario
+*/
 void copy(int fdo, int fdd)
 {
 	char buffer[NBYTES];
@@ -66,6 +79,12 @@ void copy(int fdo, int fdd)
 	close(fdo);
 }
 
+/**
+ * Función que copia el contenido de un archivo regular en otro
+ * @param orig nombre del archivo origen
+ * @param dest nombre del archivo destino
+ * @return EXIT_SUCCESS si no ha habido errores, EXIT_FAILURE en caso contrario
+*/
 void copy_regular(char *orig, char *dest)
 {
 	int fdo, fdd;
@@ -86,7 +105,11 @@ void copy_regular(char *orig, char *dest)
 	copy(fdo, fdd);
 }
 
-/*
+/**
+ * Función que copia el contenido de un enlace simbolico en otro
+ * @param orig nombre del enlace simbolico origen
+ * @param dest nombre del enlace simbolico destino
+ * 
  * primero vamos a tener que reservar memoria, para saber el nBytes vamos a usar lstat()
  * hacemos + 1 a esto ya que el caracter de fin de cadena no se guarda
  *
@@ -95,7 +118,7 @@ void copy_regular(char *orig, char *dest)
  *
  * por ultimo creamos un enlace simbolico con los datos obtenidos usando la funcion
  * symlink()
- */
+*/
 void copy_link(char *orig, char *dest)
 {
 	struct stat *stat_buff = malloc(sizeof(struct stat));

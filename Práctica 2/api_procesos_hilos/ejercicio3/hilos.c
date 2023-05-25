@@ -2,6 +2,12 @@
 #include <stdio.h>
 #include <pthread.h>
 
+/**
+ * struct thread_info - Estructura que contiene la información de un hilo
+ * @id: identificador del hilo
+ * @userNum: número de usuario
+ * @priority: prioridad del hilo
+ */
 typedef struct
 {
 	pthread_t id;
@@ -9,6 +15,11 @@ typedef struct
 	char priority;
 } thread_info;
 
+/**
+ * Función que ejecuta cada hilo. Tiene que ser de tipo void * y tener un único argumento de tipo void * arg
+ * @param arg puntero a la estructura thread_info
+ * @return NULL
+ */
 void *thread_usuario(void *arg)
 {
 	thread_info *tinfo = arg;
@@ -19,9 +30,15 @@ void *thread_usuario(void *arg)
 	return NULL;
 }
 
+/**
+ * Programa que crea N hilos (N = argc - 1), 
+ * cada uno de los cuales imprime su identificador de hilo, su número de usuario y su prioridad.
+ * @param argc número de argumentos
+ * @param argv vector de argumentos
+ * @return EXIT_SUCCESS si no ha habido errores, EXIT_FAILURE en caso contrario
+*/
 int main(int argc, char *argv[])
 {
-
 	int nThreads, i;
 	void *res;
 	pthread_attr_t attr;
@@ -32,20 +49,22 @@ int main(int argc, char *argv[])
 	{
 		perror("Thread attribute could not be created\n");
 		exit(EXIT_FAILURE);
-	}
 
 	nThreads = argc - 1;
 	tInfo = malloc(sizeof(thread_info) * nThreads);
 
 	for (i = 0; i < nThreads; ++i)
-	{
+	{	
+		// Setea el userNum de cada hilo
 		if (sscanf(argv[i + 1], "%d", &tInfo[i].userNum) == EOF)
 		{
 			printf("Argument: %s could not be read", argv[i + 1]);
 			exit(EXIT_FAILURE);
 		}
-
+		// Setea la prioridad de los hilos priorizando los pares
 		tInfo[i].priority = (tInfo[i].userNum % 2) ? 'P' : 'N';
+		
+		// Create thread
 		if (pthread_create(&tInfo[i].id, &attr, &thread_usuario, &tInfo[i]))
 		{
 			perror("Error creating thread");
@@ -59,6 +78,7 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
+	// Join threads (cierre)
 	for (i = 0; i < nThreads; ++i)
 	{
 		if (pthread_join(tInfo[i].id, &res))

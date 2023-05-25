@@ -7,6 +7,11 @@
 
 #define NBYTES 512
 
+/**
+ * Función que copia el contenido de un archivo en otro
+ * @param fdo descriptor de archivo origen
+ * @param fdd descriptor de archivo destino
+ */
 void copy(int fdo, int fdd){
 	char buffer[NBYTES];
 	int nbytesRead;
@@ -25,6 +30,12 @@ void copy(int fdo, int fdd){
 	close(fdd); close(fdo);
 }
 
+/**
+ * Función principal
+ * @param argc número de argumentos
+ * @param argv vector de argumentos
+ * @return EXIT_SUCCESS si no ha habido errores, EXIT_FAILURE en caso contrario
+ */
 int main(int argc, char *argv[]){
 	int fdo, fdd;
 	
