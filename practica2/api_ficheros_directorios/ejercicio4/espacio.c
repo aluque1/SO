@@ -61,7 +61,7 @@ int get_size_dir(char *dname, size_t *blocks){
 	struct dirent *buff = malloc(sizeof(struct dirent));
 
 	if ((dir = opendir(dname)) != NULL) {
-		while ((buff = readdir(dir)) != NULL){
+		while ((buff = readdir(dir)) != NULL){ // This is in charge of reading the whole directory
 			name = buff->d_name;
 			if (strcmp(name,".") & strcmp(name,".."))
 				get_size(name, blocks);
