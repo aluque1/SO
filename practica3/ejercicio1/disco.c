@@ -24,7 +24,6 @@ mutex m
 
 condvar v => TurnoVipActual == turnoLocal && aforoActual < N
 condvar n => TurnoNormalActual == turnoLocal && vipsEsperando == 0 && aforoActual < N
-
 */
 
 typedef struct {
